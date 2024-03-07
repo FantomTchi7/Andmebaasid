@@ -37,3 +37,12 @@ CREATE TABLE retsept(
     kategooria_id int,
     FOREIGN KEY (kasutaja_id) REFERENCES kasutaja(kasutaja_id),
     FOREIGN KEY (kategooria_id) REFERENCES kategooria(kategooria_id));
+
+ALTER TABLE koostis
+add FOREIGN KEY (retsept_retsept_id) REFERENCES retsept(retsept_id);
+
+CREATE TABLE tehtud(
+    tehtud_id int PRIMARY KEY AUTO_INCREMENT,
+    tehtud_kp date,
+    retsept_id int,
+    FOREIGN KEY (retsept_id) REFERENCES retsept(retsept_id));
