@@ -1,2 +1,2 @@
 # Andmebaasid
-This is school stuff, please ignore!
+## siia tulevad SQL laused mis on koostatud andmebaaside aluste
