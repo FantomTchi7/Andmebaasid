@@ -6,7 +6,6 @@ CREATE TABLE yhik(
     yhik_id int PRIMARY KEY AUTO_INCREMENT,
     yhik_nimi varchar(100));
     
-
 CREATE TABLE koostis(
     koostis_id int PRIMARY KEY AUTO_INCREMENT,
     kogus int,
