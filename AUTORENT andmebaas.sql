@@ -1,5 +1,5 @@
--- Kasuta XAMPP / Kirjuta kıik SQL laused ¸mber nii, et nad sobivad XAMPPi kasutamisel.
--- K‰ivita SQL lause ja kui tabel on loodud, tee vastava  pilt-aruanne Word'is.
+-- Kasuta XAMPP / Kirjuta k√µik SQL laused √ºmber nii, et nad sobivad XAMPPi kasutamisel.
+-- K√§ivita SQL lause ja kui tabel on loodud, tee vastava  pilt-aruanne Word'is.
 CREATE TABLE auto(
 autoID int not null Primary key identity(1,1),
 regNumber char(6) UNIQUE,
@@ -39,7 +39,7 @@ ADD FOREIGN KEY (markID) REFERENCES mark(markID);
 ALTER TABLE auto
 ADD FOREIGN KEY (kaigukastID) REFERENCES kaigukast(kaigukastID);
 
--- Lisa j‰rgmised 4 tabelid ja seosta need omavahel.
+-- Lisa j√§rgmised 4 tabelid ja seosta need omavahel.
 CREATE TABLE klient(
 klientiID int not null Primary key identity(1,1),
 kliendiNimi varchar(50),
@@ -48,7 +48,7 @@ aadress varchar(50),
 soiduKogemus varchar(30)
 );
 
--- Lisa oma tabeli ja seosta teisega (piisab ¸hega)
+-- Lisa oma tabeli ja seosta teisega (piisab √ºhega)
 
 CREATE TABLE amet(
 ametiID int not null Primary key identity(1,1),
@@ -79,7 +79,7 @@ FOREIGN KEY (regNumber) REFERENCES auto(regNumber),
 FOREIGN KEY (tootajaID) REFERENCES tootaja(tootajaID)
 );
 
--- Koosta SQL laused auto tabeli t‰itmiseks.
+-- Koosta SQL laused auto tabeli t√§itmiseks.
 
 INSERT INTO mark(autoMark) VALUES ('Mercedes');
 INSERT INTO mark(autoMark) VALUES ('Toyota');
@@ -97,14 +97,14 @@ INSERT INTO auto (regNumber, markID, varv, v_aasta, kaigukastID, km) VALUES
 INSERT INTO klient (kliendiNimi, telefon, aadress, soiduKogemus) VALUES
 ('Vlad K', '58024408', 'Vilde tee', '5 aastat'),
 ('David L', '58021122', 'Ehitajate tee', '3 aastat'),
-('David M', '58012233', 'Sıpruse pst', '10 aastat'),
+('David M', '58012233', 'S√µpruse pst', '10 aastat'),
 ('Bogdan V', '58016643', 'Kullerkupu', '7 aastat'),
 ('Erik G', '58021178', 'Tulika', '2 aastat');
 
 INSERT INTO amet (markID, ametiNimi) VALUES
 (1, 'Toyota EE'),
 (2, 'Mercedes Eesti'),
-(3, 'Ziguli O‹'),
+(3, 'Ziguli O√ú'),
 (1, 'Lambordzini EST'),
 (2, 'BMW EE');
 
@@ -123,7 +123,7 @@ INSERT INTO rendiLeping (rendiAlgus, rendiLopp, klientiID, regNumber, rendiKestv
 ('2024-05-01', '2024-05-10', 5, 'IJ7890', 9, 350.00, 5);
 
 -- SELECT laused.
--- N‰ide, kuvame andmed kolmest tabelist, vıttes arvesse tabelite vahelist sekundaarset vıtit vıi seost.
+-- N√§ide, kuvame andmed kolmest tabelist, v√µttes arvesse tabelite vahelist sekundaarset v√µtit v√µi seost.
 
 select * from auto, mark, kaigukast
 where mark.markID=auto.markID and kaigukast.kaigukastID=auto.kaigukastID
@@ -136,15 +136,15 @@ SELECT auto.regNumber, mark.autoMark, auto.varv, auto.v_aasta, kaigukast.kaiguka
 JOIN mark ON auto.markID = mark.markID
 JOIN kaigukast ON auto.kaigukastID = kaigukast.kaigukastID;
  
--- ‹lesanne:
+-- √úlesanne:
 
--- 1.	Koosta SELECT lause ja n‰ita mis autos milline k‰igukast (kasuta INNER JOIN)
+-- 1.	Koosta SELECT lause ja n√§ita mis autos milline k√§igukast (kasuta INNER JOIN)
 SELECT auto.regNumber, kaigukast.kaigukast FROM auto INNER JOIN kaigukast ON auto.kaigukastID = kaigukast.kaigukastID;
  
--- 2.	Koosta SELECT lause ja n‰ita mis autos milline automark (kasuta INNER JOIN)
+-- 2.	Koosta SELECT lause ja n√§ita mis autos milline automark (kasuta INNER JOIN)
 SELECT auto.regNumber, mark.autoMark FROM auto INNER JOIN mark ON auto.markID = mark.markID;
  
--- 3.	Koosta SELECT lause ja n‰ita millised autod tˆˆtaja andis rendile.
+-- 3.	Koosta SELECT lause ja n√§ita millised autod t√∂√∂taja andis rendile.
 SELECT rendiLeping.regNumber, auto.varv, tootaja.tootajanimi FROM rendiLeping INNER JOIN auto ON rendiLeping.regNumber = auto.regNumber INNER JOIN tootaja ON rendiLeping.tootajaID = tootaja.tootajaID;
  
 -- 4.	Otsi summaarne autode arv (COUNT) ja summaarne maksumus (SUM) tabelis rendileping.
@@ -155,11 +155,11 @@ SELECT klient.kliendiNimi, auto.regNumber FROM rendiLeping INNER JOIN klient ON 
 
 
 
--- Tegin GUI-s muid ıigusi
+-- Tegin GUI-s muid √µigusi
 
 GRANT SELECT, INSERT ON rendileping TO tootaja;
 
--- Tootaja ıigused kontroll
+-- Tootaja √µigused kontroll
 DELETE FROM amet WHERE ametiNimi = 'test';
 
 -- Protseduurid:
@@ -170,7 +170,7 @@ CREATE PROCEDURE lisaUurileping
 @rendiAlgus DATE, 
 @rendiLopp DATE, 
 @klientiID INT, 
-@regNumber VARCHAR(6), 
+@regNumber CHAR(6), 
 @rendiKestvus INT, 
 @hindKokku DECIMAL(5,2), 
 @tootajaID INT
@@ -196,7 +196,7 @@ BEGIN
     );
 END
 
--- 2.	Loo protseduur lepingu kustutamiseks  id j‰rgi.
+-- 2.	Loo protseduur lepingu kustutamiseks  id j√§rgi.
 
 CREATE PROCEDURE kustutaRendileping
 @lepingID INT
